@@ -1,9 +1,6 @@
 "use strict";
 
-
-
-
-// from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
+// Coffees array
 var coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
     {id: 2, name: 'Half City', roast: 'light'},
@@ -26,7 +23,7 @@ if (window.localStorage.getItem('coffeeArray') !== null) {
     coffees = JSON.parse(window.localStorage.getItem('coffeeArray'));
 }
 
-// Display initial coffee list
+// Display default coffee list
 let coffeeListContainerEl = document.getElementById("coffee-list-container");
 coffeeListContainerEl.innerHTML = displayCoffee(coffees, "all");
 
@@ -34,21 +31,21 @@ coffeeListContainerEl.innerHTML = displayCoffee(coffees, "all");
 let coffeeQuerySelectionEl = document.getElementById("query-roast-selection");
 coffeeQuerySelectionEl.addEventListener("change", function () {
     if (coffeeQuerySelectionEl.value === "light") {
-        // show all light roasts
+        // shows light roasts
         coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
     } else if (coffeeQuerySelectionEl.value === "medium") {
-        // show all medium roasts
+        // shows medium roasts
         coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
     } else if (coffeeQuerySelectionEl.value === "dark") {
-        // show all dark roasts
+        // shows dark roasts
         coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
     } else {
-        // default to show all coffees
+        // shows default coffee list
         coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
     }
 });
 
-// If the user types in a string, it will update the coffee list
+// If the user types input, it will update the coffee list
 
 let coffeeSearchEl = document.getElementById("coffee-query-input");
 coffeeSearchEl.addEventListener("keyup", function () {
@@ -59,7 +56,9 @@ coffeeSearchEl.addEventListener("keyup", function () {
     }
 });
 
-// If the user clicks submit, it will add the coffee based on the information chosen by user
+
+// Add Coffee to list functionality
+// Once the user clicks "SUBMIT", it will add the coffee based on the information entered by user
 let coffeeAddBtn = document.getElementById("add-submit-btn");
 let coffeeAddEl = document.getElementById("coffee-add-input");
 let coffeeAddRoastEl = document.getElementById("add-roast-selection");
@@ -89,12 +88,12 @@ function displayCoffeeString(coffees, searchString, roast) {
     coffees.forEach(function (coffee) {
         if (coffee.roast === roast) {
             if (coffee.name.toLowerCase().includes(searchString.toLowerCase())) {
-                htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+                htmlString += "<div class='d-flex align-items-start flex-column coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
                     "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
             }
         } else if (roast === "all") {
             if (coffee.name.toLowerCase().includes(searchString.toLowerCase())) {
-                htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+                htmlString += "<div class='d-flex align-items-start flex-column coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
                     "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
             }
         }
