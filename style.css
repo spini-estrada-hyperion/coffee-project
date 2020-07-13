@@ -1,9 +1,22 @@
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
+body {
+    /*background-image: url("img/coffee.jpg");*/
+    /*background-size: 50%;*/
+
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+#main_header {
+    text-align: center;
+    background-color:red ;
+
+}
+
+#coffee-header{
+    text-align: center;
+    font-size: 100px;
+
+}
+
+#menu-heading{
+    font-size: 75px;
+    text-align: center;
 }

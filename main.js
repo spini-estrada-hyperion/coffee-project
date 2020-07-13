@@ -1,10 +1,7 @@
 "use strict";
-let coffeeQuerySelectionEl = document.getElementById("query-roast-selection");
-let coffeeListContainerEl = document.getElementById("coffee-list-container");
-let coffeeSearchEl = document.getElementById("coffee-query-input");
-let coffeeAddEl = document.getElementById("coffee-add-input");
-let coffeeAddRoastEl = document.getElementById("add-roast-selection");
-let coffeeAddBtn = document.getElementById("add-submit-btn");
+
+
+
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
@@ -30,9 +27,11 @@ if (window.localStorage.getItem('coffeeArray') !== null) {
 }
 
 // Display initial coffee list
+let coffeeListContainerEl = document.getElementById("coffee-list-container");
 coffeeListContainerEl.innerHTML = displayCoffee(coffees, "all");
 
 // If user changes the selection input, it will update the coffee list
+let coffeeQuerySelectionEl = document.getElementById("query-roast-selection");
 coffeeQuerySelectionEl.addEventListener("change", function () {
     if (coffeeQuerySelectionEl.value === "light") {
         // show all light roasts
@@ -50,6 +49,8 @@ coffeeQuerySelectionEl.addEventListener("change", function () {
 });
 
 // If the user types in a string, it will update the coffee list
+
+let coffeeSearchEl = document.getElementById("coffee-query-input");
 coffeeSearchEl.addEventListener("keyup", function () {
     if (coffeeSearchEl.value !== "") {
         coffeeListContainerEl.innerHTML = displayCoffeeString(coffees, coffeeSearchEl.value, coffeeQuerySelectionEl.value);
@@ -59,6 +60,10 @@ coffeeSearchEl.addEventListener("keyup", function () {
 });
 
 // If the user clicks submit, it will add the coffee based on the information chosen by user
+let coffeeAddBtn = document.getElementById("add-submit-btn");
+let coffeeAddEl = document.getElementById("coffee-add-input");
+let coffeeAddRoastEl = document.getElementById("add-roast-selection");
+
 coffeeAddBtn.addEventListener("click", function (e) {
     // the next id will be coffees.length+1, roast will be the value of roast selected, name will be the name inputed
     e.preventDefault();
@@ -102,10 +107,10 @@ function displayCoffee(coffees, roast) {
     let htmlString = "";
     coffees.forEach(function (coffee) {
         if (coffee.roast === roast) {
-            htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+            htmlString += "<div class='d-flex align-items-start flex-column coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
                 "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
         } else if (roast === "all") {
-            htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+            htmlString += "<div class='d-flex align-items-start flex-column coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
                 "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
         }
     });

@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Coffee!</h1>
+<h1 id="coffee-header">Coffee!</h1>
 <div class="container d-flex" id="main-body-container">
     <div class="container overflow-auto shadow-lg p-0" id="coffee-list-background">
         <div class="container text-center m-0 p-0" id="menu-heading">Menu</div>
-        <div class="container-fluid d-flex flex-wrap overflow-auto mt-5" id="coffee-list-container">
+        <div class="container-fluid d-flex flex-wrap overflow-auto mt-5 row row-cols-3 text-wrap" id="coffee-list-container">
             <!--Data will be dynamically filled in with Javascript-->
         </div>
     </div>
+
     <div class="container mx-3 shadow-lg" id="form-container">
         <div class="container my-2" id="query-coffee-container">
             <form>
                 <div class="container-fluid d-flex flex-column px-0">
+                    <h1>Search for a Coffee</h1>
                     <label for="query-roast-selection" id="roast-query-label">
                         Roast
                     </label>
@@ -36,7 +39,7 @@
             </form>
         </div>
         <div class="container" id="add-coffee-container">
-            <h1>Add a Coffee</h1>
+            <h1>Add a Coffee to List</h1>
             <form>
                 <label for="add-roast-selection" id="roast-add-label">
                     Roast
