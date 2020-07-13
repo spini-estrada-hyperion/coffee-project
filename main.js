@@ -1,34 +1,10 @@
-"use strict"
-
-function renderCoffee(coffee) {
-    var html = '<tr class="coffee">';
-    html += '<td>' + coffee.id + '</td>';
-    html += '<td>' + coffee.name + '</td>';
-    html += '<td>' + coffee.roast + '</td>';
-    html += '</tr>';
-
-    return html;
-}
-
-function renderCoffees(coffees) {
-    var html = '';
-    for(var i = coffees.length - 1; i >= 0; i--) {
-        html += renderCoffee(coffees[i]);
-    }
-    return html;
-}
-
-function updateCoffees(e) {
-    e.preventDefault(); // don't submit the form, we just want to update the data
-    var selectedRoast = roastSelection.value;
-    var filteredCoffees = [];
-    coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
-        }
-    });
-    tbody.innerHTML = renderCoffees(filteredCoffees);
-}
+"use strict";
+let coffeeQuerySelectionEl = document.getElementById("query-roast-selection");
+let coffeeListContainerEl = document.getElementById("coffee-list-container");
+let coffeeSearchEl = document.getElementById("coffee-query-input");
+let coffeeAddEl = document.getElementById("coffee-add-input");
+let coffeeAddRoastEl = document.getElementById("add-roast-selection");
+let coffeeAddBtn = document.getElementById("add-submit-btn");
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
@@ -48,10 +24,91 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-var tbody = document.querySelector('#coffees');
-var submitButton = document.querySelector('#submit');
-var roastSelection = document.querySelector('#roast-selection');
+// Retrieves local storage if available
+if (window.localStorage.getItem('coffeeArray') !== null) {
+    coffees = JSON.parse(window.localStorage.getItem('coffeeArray'));
+}
 
-tbody.innerHTML = renderCoffees(coffees);
+// Display initial coffee list
+coffeeListContainerEl.innerHTML = displayCoffee(coffees, "all");
 
-submitButton.addEventListener('click', updateCoffees);
+// If user changes the selection input, it will update the coffee list
+coffeeQuerySelectionEl.addEventListener("change", function () {
+    if (coffeeQuerySelectionEl.value === "light") {
+        // show all light roasts
+        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+    } else if (coffeeQuerySelectionEl.value === "medium") {
+        // show all medium roasts
+        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+    } else if (coffeeQuerySelectionEl.value === "dark") {
+        // show all dark roasts
+        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+    } else {
+        // default to show all coffees
+        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+    }
+});
+
+// If the user types in a string, it will update the coffee list
+coffeeSearchEl.addEventListener("keyup", function () {
+    if (coffeeSearchEl.value !== "") {
+        coffeeListContainerEl.innerHTML = displayCoffeeString(coffees, coffeeSearchEl.value, coffeeQuerySelectionEl.value);
+    } else {
+        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+    }
+});
+
+// If the user clicks submit, it will add the coffee based on the information chosen by user
+coffeeAddBtn.addEventListener("click", function (e) {
+    // the next id will be coffees.length+1, roast will be the value of roast selected, name will be the name inputed
+    e.preventDefault();
+    let coffeeAddName = coffeeAddEl.value;
+    if (coffeeAddName === "") {
+        alert("Please enter a coffee name.");
+    } else {
+        let coffee = {
+            id: coffees.length + 1,
+            name: coffeeAddName,
+            roast: coffeeAddRoastEl.value
+        };
+        coffees.push(coffee);
+        window.localStorage.setItem('coffeeArray', JSON.stringify(coffees));
+        console.log(localStorage.getItem('coffeeArray'));
+        coffeeListContainerEl.innerHTML = displayCoffee(coffees, "all");
+        alert(`Coffee: ${coffee.name}, Roast: ${coffee.roast} is added!`);
+    }
+});
+
+function displayCoffeeString(coffees, searchString, roast) {
+    let htmlString = "";
+    coffees.forEach(function (coffee) {
+        if (coffee.roast === roast) {
+            if (coffee.name.toLowerCase().includes(searchString.toLowerCase())) {
+                htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+                    "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
+            }
+        } else if (roast === "all") {
+            if (coffee.name.toLowerCase().includes(searchString.toLowerCase())) {
+                htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+                    "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
+            }
+        }
+    });
+    return htmlString;
+}
+
+// display coffee in coffee-list-container based on roast
+function displayCoffee(coffees, roast) {
+    let htmlString = "";
+    coffees.forEach(function (coffee) {
+        if (coffee.roast === roast) {
+            htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+                "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
+        } else if (roast === "all") {
+            htmlString += "<div class='d-flex align-items-center coffee-item my-3 mx-3'>" + "<h3 class='mx-2'>" + coffee.name + "</h3>" +
+                "<p class='my-0 mx-3'>" + coffee.roast + "</p>" + "</div>";
+        }
+    });
+    return htmlString;
+
+}

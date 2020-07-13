@@ -6,29 +6,58 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Coffee!</h1>
+<h1>Coffee!</h1>
+<div class="container d-flex" id="main-body-container">
+    <div class="container overflow-auto shadow-lg p-0" id="coffee-list-background">
+        <div class="container text-center m-0 p-0" id="menu-heading">Menu</div>
+        <div class="container-fluid d-flex flex-wrap overflow-auto mt-5" id="coffee-list-container">
+            <!--Data will be dynamically filled in with Javascript-->
+        </div>
+    </div>
+    <div class="container mx-3 shadow-lg" id="form-container">
+        <div class="container my-2" id="query-coffee-container">
+            <form>
+                <div class="container-fluid d-flex flex-column px-0">
+                    <label for="query-roast-selection" id="roast-query-label">
+                        Roast
+                    </label>
+                    <select id="query-roast-selection">
+                        <option>all</option>
+                        <option>light</option>
+                        <option>medium</option>
+                        <option>dark</option>
+                    </select>
+                </div>
+                <div class="container-fluid d-flex flex-column px-0 my-3">
+                    <label for="coffee-query-input" id="coffee-query-label">Coffee Name</label>
+                    <input type="text" class="form-control" id="coffee-query-input" placeholder="Enter Coffee">
+                    <input class="button my-3" id="query-submit-btn" type="submit"/>
+                </div>
+            </form>
+        </div>
+        <div class="container" id="add-coffee-container">
+            <h1>Add a Coffee</h1>
+            <form>
+                <label for="add-roast-selection" id="roast-add-label">
+                    Roast
+                </label>
+                <div class="container-fluid d-flex flex-column px-0">
+                    <select id="add-roast-selection">
+                        <option>light</option>
+                        <option>medium</option>
+                        <option>dark</option>
+                    </select>
+                </div>
+                <div class="container-fluid d-flex flex-column px-0 my-3">
+                    <label for="coffee-add-input" id="coffee-add-label">Name</label>
+                    <input type="text" class="form-control" id="coffee-add-input" placeholder="Enter Coffee">
+                    <input class="button my-3" id="add-submit-btn" type="submit"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <form>
-        <label for="roast-selection"></label>
-        <select id="roast-selection">
-            <option>light</option>
-            <option>medium</option>
-            <option>dark</option>
-        </select>
-        <input id="submit" type="submit" />
-    </form>
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>ROAST</th>
-            </tr>
-        </thead>
-        <tbody id="coffees"></tbody>
-    </table>
-
-    <script src="main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
