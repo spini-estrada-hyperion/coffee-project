@@ -1,9 +1,26 @@
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
+body {
+    /*background-color: lightgrey;*/
+    background-image: url("img/coffee.jpg");
+    background-size: 50%;
+
+}
+#coffee-list-container {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 500px;
+    font
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+#main_header {
+    text-align: center;
+
+    background-color:red ;
+
+}
+
+#menu-heading{
+    background-color: ;
 }
