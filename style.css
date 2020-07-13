@@ -4,11 +4,6 @@ body {
 
 }
 
-#main_header {
-    text-align: center;
-    background-color:red ;
-
-}
 
 #coffee-header{
     text-align: center;
@@ -18,15 +13,7 @@ body {
     background-size: 50%;
 
 }
-#coffee-list-container {
-    background-color: grey;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    height: 500px;
-    font
-}
+
 
 #main_header {
     text-align: center;
