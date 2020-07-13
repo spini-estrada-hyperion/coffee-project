@@ -13,10 +13,32 @@ body {
 #coffee-header{
     text-align: center;
     font-size: 100px;
+    /*background-color: lightgrey;*/
+    background-image: url("img/coffee.jpg");
+    background-size: 50%;
+
+}
+#coffee-list-container {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 500px;
+    font
+}
+
+#main_header {
+    text-align: center;
+
+    background-color:red ;
+
 
 }
 
 #menu-heading{
     font-size: 75px;
     text-align: center;
+    background-color: ;
+
 }
