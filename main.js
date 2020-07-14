@@ -24,61 +24,61 @@ if (window.localStorage.getItem('coffeeArray') !== null) {
 }
 
 // Display default coffee list
-let coffeeListContainerEl = document.getElementById("coffee-list-container");
-coffeeListContainerEl.innerHTML = displayCoffee(coffees, "all");
+let coffeeListContainer = document.getElementById("coffee-list-container");
+coffeeListContainer.innerHTML = displayCoffee(coffees, "all");
 
 // If user changes the selection input, it will update the coffee list
-let coffeeQuerySelectionEl = document.getElementById("query-roast-selection");
-coffeeQuerySelectionEl.addEventListener("change", function () {
-    if (coffeeQuerySelectionEl.value === "light") {
+let coffeeQuerySelection = document.getElementById("query-roast-selection");
+coffeeQuerySelection.addEventListener("change", function () {
+    if (coffeeQuerySelection.value === "light") {
         // shows light roasts
-        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
-    } else if (coffeeQuerySelectionEl.value === "medium") {
+        coffeeListContainer.innerHTML = displayCoffee(coffees, coffeeQuerySelection.value);
+    } else if (coffeeQuerySelection.value === "medium") {
         // shows medium roasts
-        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
-    } else if (coffeeQuerySelectionEl.value === "dark") {
+        coffeeListContainer.innerHTML = displayCoffee(coffees, coffeeQuerySelection.value);
+    } else if (coffeeQuerySelection.value === "dark") {
         // shows dark roasts
-        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+        coffeeListContainer.innerHTML = displayCoffee(coffees, coffeeQuerySelection.value);
     } else {
         // shows default coffee list
-        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+        coffeeListContainer.innerHTML = displayCoffee(coffees, coffeeQuerySelection.value);
     }
 });
 
 // If the user types input, it will update the coffee list
 
-let coffeeSearchEl = document.getElementById("coffee-query-input");
-coffeeSearchEl.addEventListener("keyup", function () {
-    if (coffeeSearchEl.value !== "") {
-        coffeeListContainerEl.innerHTML = displayCoffeeString(coffees, coffeeSearchEl.value, coffeeQuerySelectionEl.value);
+let coffeeSearch = document.getElementById("coffee-query-input");
+coffeeSearch.addEventListener("keyup", function () {
+    if (coffeeSearch.value !== "") {
+        coffeeListContainer.innerHTML = displayCoffeeString(coffees, coffeeSearch.value, coffeeQuerySelection.value);
     } else {
-        coffeeListContainerEl.innerHTML = displayCoffee(coffees, coffeeQuerySelectionEl.value);
+        coffeeListContainer.innerHTML = displayCoffee(coffees, coffeeQuerySelection.value);
     }
 });
 
 
 // Add Coffee to list functionality
 // Once the user clicks "SUBMIT", it will add the coffee based on the information entered by user
-let coffeeAddBtn = document.getElementById("add-submit-btn");
-let coffeeAddEl = document.getElementById("coffee-add-input");
-let coffeeAddRoastEl = document.getElementById("add-roast-selection");
+let AddcoffeeBtn = document.getElementById("add-submit-btn");
+let Addcoffee = document.getElementById("coffee-add-input");
+let AddcoffeeRoast = document.getElementById("add-roast-selection");
 
-coffeeAddBtn.addEventListener("click", function (e) {
+AddcoffeeBtn.addEventListener("click", function (e) {
     // the next id will be coffees.length+1, roast will be the value of roast selected, name will be the name inputed
     e.preventDefault();
-    let coffeeAddName = coffeeAddEl.value;
+    let coffeeAddName = Addcoffee.value;
     if (coffeeAddName === "") {
         alert("Please enter a coffee name.");
     } else {
         let coffee = {
             id: coffees.length + 1,
             name: coffeeAddName,
-            roast: coffeeAddRoastEl.value
+            roast: AddcoffeeRoast.value
         };
         coffees.push(coffee);
         window.localStorage.setItem('coffeeArray', JSON.stringify(coffees));
         console.log(localStorage.getItem('coffeeArray'));
-        coffeeListContainerEl.innerHTML = displayCoffee(coffees, "all");
+        coffeeListContainer.innerHTML = displayCoffee(coffees, "all");
         alert(`Coffee: ${coffee.name}, Roast: ${coffee.roast} is added!`);
     }
 });
