@@ -37,7 +37,10 @@ coffeeQuerySelection.addEventListener("change", function () {
         // shows medium roasts
         coffeeListContainer.innerHTML = displayCoffee(coffees, coffeeQuerySelection.value);
     } else if (coffeeQuerySelection.value === "dark") {
-        // shows dark roasts
+        // shows dark roastsfor (let i=0; i<str.length;i++){
+        if (str[i].toLowerCase() === cha.toLowerCase()){
+            num++;
+        }
         coffeeListContainer.innerHTML = displayCoffee(coffees, coffeeQuerySelection.value);
     } else {
         // shows default coffee list
@@ -46,7 +49,6 @@ coffeeQuerySelection.addEventListener("change", function () {
 });
 
 // If the user types input, it will update the coffee list
-
 let coffeeSearch = document.getElementById("coffee-query-input");
 coffeeSearch.addEventListener("keyup", function () {
     if (coffeeSearch.value !== "") {
@@ -83,6 +85,7 @@ AddcoffeeBtn.addEventListener("click", function (e) {
     }
 });
 
+// display coffee by search input
 function displayCoffeeString(coffees, searchString, roast) {
     let htmlString = "";
     coffees.forEach(function (coffee) {
